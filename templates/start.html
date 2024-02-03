@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UNO</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="center-content">
+        <form action="{{ url_for('reset') }}" method="post">
+            <div class="formcentered">
+                <h2>Wybierz liczbę graczy</h2>
+            </div>
+            <div class="formcentered">
+                <select name="numPlayers" id="numPlayers">
+                    <option value="2" name="player2" id="player2" selected>2</option>
+                    <option value="3" name="player3" id="player3">3</option>
+                    <option value="4" name="player4" id="player4">4</option>
+                </select>
+            </div>
+            <div class="names">
+                <form action="" method="POST">
+                    <label for="fname">Gracz 1:</label>
+                    <input type="text" id="firstname" name="fname">
+                    <label for="fname">Gracz 2:</label>
+                    <input type="text" id="firstname" name="fname">
+                    <label for="fname">Gracz 3:</label>
+                    <input type="text" id="firstname" name="fname">
+                    <label for="fname">Gracz 4:</label>
+                    <input type="text" id="firstname" name="fname">
+                </form>
+                <input style="border: none" type="submit" value="Rozpocznij grę" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>

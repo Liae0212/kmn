@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UNO</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        .button1 {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row">
+    <div class="column">
+        <h1>
+            {% if currentPlayer == 0 %}
+                {{ playername[0] }} 's Turn
+            {% elif currentPlayer == 1 %}
+                {{ playername[1] }} 's Turn
+            {% elif currentPlayer == 2 %}
+                {{ playername[2] }} 's Turn
+            {% elif currentPlayer == 3 %}
+                {{ playername[3] }} 's Turn
+            {% endif %}
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="column">
+        <h2>Pile:</h2>
+        <p><img src="{{ url_for('static', filename=discards[0]+'.png') }}" width="150px"></p>
+        <a class="button1" href="/board">Next player</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="column">
+        <h2>Amount of other players cards:</h2>
+        {% for player in range(numPlayers|int): %}
+            {% if player != currentPlayer %}
+                <h3>{{ playername[player] }}</h3>
+                <p>Number of cards: {{ players[player]|length }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="bottom-buttons">
+        <a href="{{ url_for('start') }}" class="button2 button1">Restart</a>
+    </div>
+</div>
+
+</body>
+</html>

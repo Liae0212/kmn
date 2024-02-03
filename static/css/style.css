@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    font-family: Helvetica, sans-serif;
+    margin-top: 30px;
+    font-weight: 300;
+    color: #FDFDFF;
+    place-items: center;
+}
+
+.game-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -40px;
+}
+
+.players-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.player-info {
+    text-align: center;
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pile {
+    margin-bottom: 20px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.player-cards,
+.players {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottom-buttons {
+    margin-top: 20px;
+}
+
+a.button1,
+input[type=submit],
+select {
+    display: inline-block;
+    margin: 5px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 18px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #333333;
+    background-color: #f0f0f0;
+    text-align: center;
+    transition: all 0.4s;
+}
+
+a.button1:hover,
+input[type=submit]:hover,
+select:hover {
+    background-color: #777777;
+    color: #ffffff;
+}
+
+a.button2 {
+    background-color: #4285f4;
+    color: #ffffff;
+}
+
+a.button2:hover {
+    background-color: #0d47a1;
+}
+
+
+@media all and (max-width: 30em) {
+    a.button1,
+    input[type=submit] {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
+.column {
+    float: right;
+    padding: 10px;
+}
+
+.right {
+    float: left;
+    width: 20%;
+}
+
+.left {
+    width: 80%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.playablecard {
+    z-index: 1;
+    border-radius: 28px;
+    padding-left: 10px;
+    transition: transform 2s ease; 
+    transform: translateY(0); 
+}
+
+.playablecard:not(:first-child) {
+    margin-left: calc(var(--distance) * -1);
+}
+
+.playablecard.slide-forward {
+    animation: slideUp 1s ease forwards; /* Apply the slideUp animation */
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(0); /* Start position */
+    }
+    100% {
+        transform: translateY(-20px); /* End position */
+    }
+}
+
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.card {
+    padding-left: 10px;
+    animation: shake 0.5s ease-in-out;
+    transform-style: preserve-3d; 
+}
+
+.fa-stack {
+    margin-left: -1rem;
+}

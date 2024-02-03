@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNO</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="game-board">
+    <div class="players-info">
+        {% for player in range(numPlayers|int): %}
+            <div class="player-info">
+                <h3>{{ playername[player] }}</h3>
+                <p>Number of cards: {{ players[player]|length }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="center-content">
+        <h1>
+            {% if currentPlayer is not none %}
+                {{ playername[currentPlayer] }}'s Turn
+            {% endif %}
+        </h1>
+
+        <div class="pile">
+            <h2>Pile:</h2>
+            <p><img src=" {{ url_for('static', filename=discards[0]+'.png') }}" width="150px"></p>
+        </div>
+
+        <div class="cards">
+            {% for player in range(numPlayers|int): %}
+                {% if player == currentPlayer %}
+                    <div class="player-cards">
+                        {% for card in players[player] %}
+                            {% if card in playable %}
+                                <a href="{{ url_for('move', discardedCard=card) }}">
+                                    <img class="playablecard slide-forward" src="{{ url_for('static', filename=card+'.png') }}" width="150px">
+                                </a>
+                            {% else %}
+                                <img class="card" src="{{ url_for('static', filename=card+'.png') }}" width="150px">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="players">
+            {% for player in range(numPlayers|int): %}
+                {% if player != currentPlayer %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="buttons">
+        {% if drawbutton %}
+            <a href="{{ url_for('draw') }}" class="button1">You have to draw cards: {{ drawcards }}</a>
+        {% endif %}
+
+        {% if endbutton %}
+            <a href="{{ url_for('endturn') }}" class="button1">End your tour</a>
+        {% endif %}
+
+        {% if pickbutton %}
+            <a href="{{ url_for('pick') }}" class="button1">Draw one card</a>
+        {% endif %}
+
+        <div class="bottom-buttons">
+            <a href="{{ url_for('start') }}" class="button2 button1">Restart</a>
+        </div>
+
+        {% if uno_pending %}
+        <a href="{{ url_for('uno') }}" class="button1">UNO!</a>
+        {% endif %}
+
+        {% if wildcard: %}
+            <h3>Choose color:</h3>
+            <div class="wildcard-container">
+                <a href="{{ url_for('wildcard', card='yellow_wildcard') }}">
+                    <img class="playablecard" src="{{ url_for('static', filename='yellow_wildcard.png') }}" width="100px">
+                </a>
+                <a href="{{ url_for('wildcard', card='blue_wildcard') }}">
+                    <img class="playablecard" src="{{ url_for('static', filename='blue_wildcard.png') }}" width="100px">
+                </a>
+                <a href="{{ url_for('wildcard', card='red_wildcard') }}">
+                    <img class="playablecard" src="{{ url_for('static', filename='red_wildcard.png') }}" width="100px">
+                </a>
+                <a href="{{ url_for('wildcard', card='green_wildcard') }}">
+                    <img class="playablecard" src="{{ url_for('static', filename='green_wildcard.png') }}" width="100px">
+                </a>
+            </div>
+        {% endif %}
+
+        {% if drawfour: %}
+            <h3>Choose color:</h3>
+            <div class="drawfour-container">
+                <a href="{{ url_for('drawfour', card='yellow_draw_four') }}">
+                    <img class="playablecard" src="{{ url_for('static', filename='yellow_draw_four.png') }}" width="100px">
+                </a>
+                <a href="{{ url_for('drawfour', card='blue_draw_four') }}">
+                    <img class="playablecard" src="{{ url_for('static', filename='blue_draw_four.png') }}" width="100px">
+                </a>
+                <a href="{{ url_for('drawfour', card='red_draw_four') }}">
+                    <img class="playablecard" src="{{ url_for('static', filename='red_draw_four.png') }}" width="100px">
+                </a>
+                <a href="{{ url_for('drawfour', card='green_draw_four') }}">
+                    <img class="playablecard" src="{{ url_for('static', filename='green_draw_four.png') }}" width="100px">
+                </a>
+            </div>
+        {% endif %}
+
+
+
+        {% if wait != 0 %}
+        <h3>Zablokowałeś następnego gracza.</h3>
+        {% endif %}
+
+    </div>
+</div>
+</body>
+</html>
